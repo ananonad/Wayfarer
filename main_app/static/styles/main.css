@@ -1,0 +1,22 @@
+.landingimg {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: brightness(80%);
+}
+.landingtext {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-105%, -45%);
+    color: ivory;
+    filter: drop-shadow(.25rem .25rem .2rem black);
+}
+.landingtitle {
+    font-size: 16vh;
+}
+.landinghr {
+    width: 110%;
+}
+.landingsubtitle {
+    font-size: 4vh;
+}
