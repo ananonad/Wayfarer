@@ -30,10 +30,10 @@ class WayfarerList(TemplateView):
         context = super().get_context_data(**kwargs)
         name = self.request.GET.get("name")
         if name != None:
-            context["planets"] = Planet.objects.filter(name__icontains=name,  user=self.request.user)
+            context["planets"] = Planet.objects.filter(name__icontains=name)
             context["header"] = f"Searching for {name}"
         else:
-            context["planets"] = Planet.objects.all(user=self.request.user)
+            context["planets"] = Planet.objects.all()
             context["header"] = "Trending Planets"
         return context
 
