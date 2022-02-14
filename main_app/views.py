@@ -13,7 +13,7 @@ from django.views.generic import DetailView
 from django.urls import reverse
 
 class Home(TemplateView):
-    template_name = "home.html"
+    template_name = "spacefarer.html"
 
 
 class About(TemplateView):
@@ -26,7 +26,7 @@ class Index(TemplateView):
 
 @method_decorator(login_required, name='dispatch')
 class WayfarerList(TemplateView):
-    template_name = "Wayfarer_list.html"
+    template_name = "spacefarer_list.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         name = self.request.GET.get("name")
@@ -41,27 +41,23 @@ class WayfarerList(TemplateView):
 class WayfarerCreate(CreateView):
     model = Planet
     fields = ['name', 'img', 'bio']
-    template_name = "wayfarer_create.html"
-    success_url = "/wayfarers/"
-    # def get_success_url(self):
-    #     return reverse('wayfarer_detail', kwargs={'pk': self.object.pk})
+    template_name = "spacefarer_create.html"
+    success_url = "/spacefarer/"
 
 class WayfarerDetail(DetailView):
     model = Planet
-    template_name = "Wayfarer_detail.html"
+    template_name = "spacefarer_detail.html"
 
 class WayfarerUpdate(UpdateView):
     model = Planet
     fields = ['name', 'img', 'bio',]
-    template_name = "wayfarer_update.html"
-    success_url = "/wayfarers/"
-    # def get_success_url(self):
-    #     return reverse('wayfarer_detail', kwargs={'pk': self.object.pk})
+    template_name = "spacefarer_update.html"
+    success_url = "/spacefarers/"
    
 class WayfarerDelete(DeleteView):
     model = Planet
-    template_name = "wayfarer_delete_confirmation.html"
-    success_url = "/wayfarers/"
+    template_name = "spacefarer_delete_confirmation.html"
+    success_url = "/spacefarers/"
 
 class Signup(View):
     def get(self, request):
@@ -73,7 +69,7 @@ class Signup(View):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect("wayfarer_list")
+            return redirect("spacefarer_list")
         else:
             context = {"form": form}
             return render(request, "registration/signup.html", context)
@@ -82,15 +78,15 @@ class Signup(View):
 #     model = Comment
 #     fields = ['name', 'title', 'comment']
 #     template_name = "comment_create.html"
-#     success_url = "/wayfarers/"
+#     success_url = "/spacefarers/"
 
-# class WayfarerUpdate(UpdateView):
+# class CommentUpdate(UpdateView):
 #     model = Comment
 #     fields = ['name', 'title', 'comment',]
 #     template_name = "comment_update.html"
-#     success_url = "/wayfarers/"
+#     success_url = "/spacefarers/"
 
-# class WayfarerDelete(DeleteView):
+# class CommentDelete(DeleteView):
 #     model = Comment
 #     template_name = "comment_delete_confirmation.html"
-#     success_url = "/wayfarers/"
+#     success_url = "/spacefarers/"
