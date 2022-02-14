@@ -21,21 +21,6 @@ class Index(TemplateView):
 
 class WayfarerList(TemplateView):
     template_name = "Wayfarer_list.html"
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context["Wayfarers"] = Wayfarer 
-    #     return context
-
-class WayfarerCreate(CreateView):
-    model = Wayfarer
-    fields = ['name', 'img', 'bio']
-    template_name = "wayfarer_create.html"
-    success_url = "/wayfarers/"
-
-class WayfarertDetail(DetailView):
-    model = Wayfarer
-    template_name = "Wayfarer_detail.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         name = self.request.GET.get("name")
@@ -46,3 +31,14 @@ class WayfarertDetail(DetailView):
             context["planets"] = Planet.objects.all()
             context["header"] = "Trending Planets"
         return context
+
+class WayfarerCreate(CreateView):
+    model = Planet
+    fields = ['name', 'img', 'bio']
+    template_name = "wayfarer_create.html"
+    success_url = "/wayfarers/"
+
+class WayfarerDetail(DetailView):
+    model = Planet
+    template_name = "Wayfarer_detail.html"
+   
