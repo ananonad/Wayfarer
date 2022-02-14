@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Spacefarers</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home Base</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="/index/">Index</a></li>
+                </ul>
+                <form class="navbar-form navbar-right" method=“get”>
+                    <div class="form-group">
+                      <input type=“text” class="form-control" name=“name” placeholder=Search...>
+                    </div>
+                    <button type=“submit” class="btn btn-success" value=“Search”>Search</button>
+                </form>
+            </div>
+        </nav>
+    </div>
+    <div class="container-fluid wayfarer">
+        <div class="col-md-5 placelist wayfarer topspace">
+            {% for planet in planets %}
+            <a class="container-fluid wayfarer" href="/wayfarer/{{planet.name}}">
+                <img class="wayfarerphoto" src="{{planet.img}}" alt="{{planet.name}}"/>
+                <h2 class="planetname">{{planet.name}}</h2>
+            </a>
+            {% empty %}
+            <p>No Planets Available</p>
+            {% endfor %}
+        </div>
+        <div class="col-md-7 postdetails">
+        </div>
+    </div>
+</body>
+{% endblock %}
