@@ -3,7 +3,9 @@ from .models import Planet
 from django.views import View 
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
-   
+from django.views.generic.edit import CreateView
+from django.views.generic import DetailView
+
 class Home(TemplateView):
     template_name = "home.html"
 
@@ -40,3 +42,13 @@ class WayfarerList(TemplateView):
     #     context = super().get_context_data(**kwargs)
     #     context["Wayfarers"] = Wayfarer 
     #     return context
+
+class WayfarerCreate(CreateView):
+    model = Wayfarer
+    fields = ['name', 'img', 'bio']
+    template_name = "wayfarer_create.html"
+    success_url = "/wayfarers/"
+
+class WayfarertDetail(DetailView):
+    model = Wayfarer
+    template_name = "Wayfarer_detail.html"
