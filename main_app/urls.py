@@ -10,7 +10,5 @@ urlpatterns = [
      path('wayfarer/<int:pk>/', views.WayfarerDetail.as_view(), name="wayfarer_detail"),
      path('wayfarer/<int:pk>/update',views.WayfarerUpdate.as_view(), name="wayfarer_update"),
      path('wayfarer/<int:pk>/delete',views.WayfarerDelete.as_view(), name="wayfarer_delete"),
-
-
      path('accounts/signup/', views.Signup.as_view(), name="signup")
 ]
