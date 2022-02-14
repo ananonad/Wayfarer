@@ -53,10 +53,33 @@ label {
     margin: 0 2.5vw;
 }
 .placelist {
-    background-color: aqua;
-    height: 100vh;
+    height: fit-content;
 }
 .postdetails {
-    background-color: blueviolet;
-    height: 100vh;
+    background-color: #0e0f0f;
+    height: 500vh;
+}
+.wayfarer {
+    margin-left:0! important;
+    margin-right:0! important;    
+    padding:0! important;
+}
+.wayfarerphoto {
+    width: 120%;
+    height: 20vh;
+    object-fit: cover;
+    margin: 0! important;
+    padding: 0! important;
+}
+.planetname {
+    color: ivory;
+    font-size: 8vh;
+    position: relative;
+    bottom: 1.25em;
+    left: .75em;
+    margin: 0 0 -1.1em -.5em;
+    filter: drop-shadow(.25rem .25rem .75rem black);
+}
+.topspace {
+    margin-top: 7vh;
 }

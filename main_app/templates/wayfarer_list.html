@@ -20,13 +20,19 @@
             </div>
         </nav>
     </div>
-    <div class="container-fluid">
-    <div class="col-md-4 placelist">
-        
-    </div>
-    <div class="col-md-8 postdetails">
-        
-    </div>
+    <div class="container-fluid wayfarer">
+        <div class="col-md-5 placelist wayfarer topspace">
+            {% for planet in planets %}
+            <a class="container-fluid wayfarer" href="/wayfarer/{{planet.name}}">
+                <img class="wayfarerphoto" src="{{planet.img}}" alt="{{planet.name}}"/>
+                <h2 class="planetname">{{planet.name}}</h2>
+            </a>
+            {% empty %}
+            <p>No Planets Available</p>
+            {% endfor %}
+        </div>
+        <div class="col-md-7 postdetails">
+        </div>
     </div>
 </body>
 {% endblock %}
