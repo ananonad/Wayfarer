@@ -20,7 +20,13 @@ class Index(TemplateView):
 class WayfarerList(TemplateView):
     template_name = "Wayfarer_list.html"
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context["Wayfarers"] = Wayfarer 
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        name = self.request.GET.get("name")
+        if name != None:
+            context["planets"] = Planet.objects.filter(name__icontains=name)
+            context["header"] = f"Searching for {name}"
+        else:
+            context["planets"] = Planet.objects.all()
+            context["header"] = "Trending Planets"
+        return context
