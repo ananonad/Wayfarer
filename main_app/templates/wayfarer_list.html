@@ -1,29 +1,2 @@
-{% extends 'home.html' %} {% block content %}
 
-<h1 class="title">Search</h1>
 
-<form class="navbar-form" method="get">
-    <div class="form-group">
-      <input type="text" class="form-control" name="name" placeholder="Search">
-    </div>
-    <button type="submit" class="btn btn-success" value="Search">Search</button>
-    <a class="button is-dark" href="{% url 'wayfarer_list' %}">Clear Search</a>
-</form>
-<div class="gallery">
-  {% for wayfarer in wayfarers %}
-  <a href="">
-    <div class="card">
-      <div class="card-image">
-        <figure class="image is-square">
-          <img src="{{wayfarer.img}}" alt="{{wayfarer.name}}" />
-        </figure>
-      </div>
-      <div class="card-header">
-        <p class="card-header-title">{{wayfarer.name}}</p>
-      </div>
-    </div>
-  </a>
-  {% endfor %}
-</div>
-
-{% endblock %}
