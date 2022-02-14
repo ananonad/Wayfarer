@@ -3,7 +3,7 @@ from .models import Planet
 from django.views import View 
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 
 class Home(TemplateView):
@@ -41,4 +41,14 @@ class WayfarerCreate(CreateView):
 class WayfarerDetail(DetailView):
     model = Planet
     template_name = "Wayfarer_detail.html"
+
+class WayfarerUpdate(UpdateView):
+    model = Planet
+    fields = ['name', 'img', 'bio',]
+    template_name = "wayfarer_update.html"
+    success_url = "/wayfarers/"
    
+class WayfarerDelete(DeleteView):
+    model = Planet
+    template_name = "wayfarer_delete_confirmation.html"
+    success_url = "/wayfarers/"
