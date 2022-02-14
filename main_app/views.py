@@ -10,6 +10,7 @@ from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
+from django.urls import reverse
 
 class Home(TemplateView):
     template_name = "home.html"
@@ -42,6 +43,8 @@ class WayfarerCreate(CreateView):
     fields = ['name', 'img', 'bio']
     template_name = "wayfarer_create.html"
     success_url = "/wayfarers/"
+    # def get_success_url(self):
+    #     return reverse('wayfarer_detail', kwargs={'pk': self.object.pk})
 
 class WayfarerDetail(DetailView):
     model = Planet
@@ -52,6 +55,8 @@ class WayfarerUpdate(UpdateView):
     fields = ['name', 'img', 'bio',]
     template_name = "wayfarer_update.html"
     success_url = "/wayfarers/"
+    # def get_success_url(self):
+    #     return reverse('wayfarer_detail', kwargs={'pk': self.object.pk})
    
 class WayfarerDelete(DeleteView):
     model = Planet
@@ -72,3 +77,20 @@ class Signup(View):
         else:
             context = {"form": form}
             return render(request, "registration/signup.html", context)
+
+# class CommentCreate(CreateView):
+#     model = Comment
+#     fields = ['name', 'title', 'comment']
+#     template_name = "comment_create.html"
+#     success_url = "/wayfarers/"
+
+# class WayfarerUpdate(UpdateView):
+#     model = Comment
+#     fields = ['name', 'title', 'comment',]
+#     template_name = "comment_update.html"
+#     success_url = "/wayfarers/"
+
+# class WayfarerDelete(DeleteView):
+#     model = Comment
+#     template_name = "comment_delete_confirmation.html"
+#     success_url = "/wayfarers/"
