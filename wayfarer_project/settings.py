@@ -77,7 +77,8 @@ WSGI_APPLICATION = 'wayfarer_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql'
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'wayfarer'
     }
 }
 
@@ -123,3 +124,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,'main_app/static')]
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = '/wayfarer/'
+LOGOUT_REDIRECT_URL = '/'
