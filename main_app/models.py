@@ -18,8 +18,8 @@ class Planet(models.Model):
         ordering = ['name']
 
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    favorite_color = models.CharField(max_length=50)
+# class Profile(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     favorite_color = models.CharField(max_length=50)
 
 #class User(AbstractUser):
