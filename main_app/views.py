@@ -12,6 +12,23 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 
+@method_decorator(login_required, name='dispatch')
+
+class ProfileView(View):
+    def get(self, request):
+        form = UserCreationForm()
+        context = {"form": form}
+        return render(request, "profile.html", context)
+    def post(self, request):
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("home.html")
+        else:
+            context = {"form": form}
+            return render(request, "profile.html", context)
+
 class Landing(TemplateView):
     template_name = "landing.html"
 
@@ -23,8 +40,6 @@ class Index(TemplateView):
 
 
 
-
-@method_decorator(login_required, name='dispatch')
 
 class Home(TemplateView):
     template_name = "home.html"
@@ -39,9 +54,6 @@ class Home(TemplateView):
             context["header"] = "Trending Planets"
         return context
         
-@login_required
-def profile(request):
-    return render(request, 'edit_user.html')
 
 
 
