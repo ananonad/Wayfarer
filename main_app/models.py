@@ -23,6 +23,6 @@ class Profile(models.Model):
 #     avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
 #     bio = models.TextField()
 
-#     def __str__(self):
-#         return self.user.username
+    # def __str__(self):
+    #     return self.user.username
 #class User(AbstractUser):
