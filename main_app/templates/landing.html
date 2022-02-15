@@ -1,19 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="container">
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand active" href="/">Spacefarers</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li><a href="/about/">About</a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+{% include 'restrictednav.html' %}
     <div>
-        <img class="landingimg" width="100%" src="https://www.paolini.net/wp-content/uploads/2018/03/1001-future-planet-banner.jpg">
+        <img class="landingimg" src="https://www.paolini.net/wp-content/uploads/2018/03/1001-future-planet-banner.jpg">
         <div class="landingtext">
             <h1 class="landingtitle">Spacefarers</h1>
             <hr class="landinghr">

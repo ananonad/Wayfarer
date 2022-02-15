@@ -1,18 +1,4 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="container">
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                  <a class="navbar-brand active" href="/">Spacefarers</a>
-                </div>
-                <ul class="nav navbar-nav">
-                  <li><a href="/">Home Base</a></li>
-                  <li class="active"><a href="/about/">About</a></li>
-                  <li><a href="/index/">Index</a></li>
-                </ul>
-              </div>
-        </nav>
-    </div>
-</body>
+{% include 'nav.html'}
 {% endblock %}

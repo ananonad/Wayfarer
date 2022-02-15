@@ -28,12 +28,12 @@ class Home(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         name = self.request.GET.get("name")
-        # if name != None:
-        #     context["planets"] = Planet.objects.filter(name__icontains=name, user=self.request.user)
-        #     context["header"] = f"Searching for {name}"
-        # else:
-        #     context["planets"] = Planet.objects.all(user=self.request.user)
-        #     context["header"] = "Trending Planets"
+        if name != None:
+            context["planets"] = Planet.objects.filter(name__icontains=name)
+            context["header"] = f"Searching for {name}"
+        else:
+            context["planets"] = Planet.objects.all()
+            context["header"] = "Trending Planets"
         return context
         
 @login_required
@@ -88,7 +88,7 @@ class Signup(View):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect("list")
+            return redirect("home.html")
         else:
             context = {"form": form}
             return render(request, "registration/signup.html", context)
