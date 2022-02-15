@@ -103,3 +103,18 @@ label {
 .darkerplease {
     background-color: #0e0f0f! important;
 }
+a:hover {
+    color: #c4d1d1;
+    background-color: transparent;
+}
+.posticons {
+    color: ivory;
+}
+.buttonoverride {
+    padding: 0 8px;
+    font-size: 25px;
+    position: relative;
+    bottom: 36px;
+    right: 8px;
+    margin-bottom: -33px;
+}
