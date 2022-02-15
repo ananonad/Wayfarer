@@ -35,6 +35,12 @@ class Home(TemplateView):
             context["planets"] = Planet.objects.all()
             context["header"] = "Trending Planets"
         return context
+        
+@login_required
+def profile(request):
+    return render(request, 'edit_user.html')
+
+
 
 class List(TemplateView):
     template_name = "list.html"
@@ -69,6 +75,8 @@ class Delete(DeleteView):
     model = Planet
     template_name = "delete.html"
     success_url = "/home/"
+
+
 
 class Signup(View):
     def get(self, request):
