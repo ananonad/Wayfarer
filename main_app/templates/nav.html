@@ -3,19 +3,46 @@
     <nav class="navbar navbar-inverse darkerplease navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
+                {% if user.is_authenticated %}
                 <a class="navbar-brand" href="/home">Spacefarers</a>
+                {% else %}
+                <a class="navbar-brand" href="/">Spacefarers</a>
+                {% endif %}
             </div>
             <ul class="nav navbar-nav">
+                {% if user.is_authenticated %}
                 <li><a href="/home/">Home Base</a></li>
-                <li><a href="/about/">About</a></li>
                 <li><a href="/list/">Travel</a></li>
+                {% endif %}
+                <li><a href="/about/">About</a></li>
             </ul>
-            <form class="navbar-form navbar-right" method=“get”>
+            <form class="navbar-form pull-left">
                 <div class="form-group">
-                  <input type=“text” class="form-control" name=“name” placeholder=Search...>
+                    <input type="text" class="form-control" placeholder="Search">
                 </div>
-                <button type=“submit” class="btn btn-success" value=“Search”>Search</button>
+                <button type="submit" class="btn btn-default">Submit</button>
             </form>
+            {% if user.is_authenticated %}
+            <ul class="nav navbar-nav">
+                <li><a>Welcome, {{user.username}}</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Log Out</a></li>
+                        <li><a href="#">Edit Account</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Delete Account</a></li>
+                    </ul>
+                </li>
+            </ul>
+            {% else %}
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/home/">Log In</a></li>
+                <li><a href="/list/">Sign Up</a></li>
+            </ul>
+            {% endif %}
         </div>
     </nav>
 </div>
