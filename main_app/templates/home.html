@@ -33,6 +33,11 @@
             {% endfor %}
         </div>
         <div class="col-md-7 postdetails">
+            {% if user.is_authenticated %}
+            <h1 class=“landingtitle”>Welcome: {{user.username}}</h1>
+            {% else %}
+            <h1 class="landingtitle">There's nothing here. :(</h1>
+            {% endif %}
         </div>
     </div>
 </body>
