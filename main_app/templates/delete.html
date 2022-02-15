@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+{% block content %}
+{% include 'nav.html'}
 <h1 class="title pt-5">Are you sure you want to Delete {{wayfarer.name}}?</h1>
 <form method="post">
     {% csrf_token %}
