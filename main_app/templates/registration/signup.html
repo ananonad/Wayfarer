@@ -1,20 +1,12 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block content %}
+{% include 'nav.html' %}
 
-<form class="row gy-2 gx-3 align-items-center">
-    <div class="form-group">
-        <input class="form-control" type ="name" placeholder="Jane Doe">
-    </div>
-        <div class="form-group">
-            <input class="form-control" type="email" placeholder="E-mail">
-        </div>
-        <div class="form-group">
-            <input class="form-control" type="password" placeholder="Password">
-        </div>
-        <div class="form-group">
-            <input class="form-control" type="address" placeholder="Planet">
-        </div>
-        <button type="submit" class="btn btn-success">Sign Up</button>
+<h1 class="title">Sign Up</h1>
+<form method="post" action="{% url 'signup' %}">
+    {% csrf_token %} {{ form.as_p }}
+    <input type="submit" class="btn" value="Sign Up" />
+    <input type="hidden" name="next" value="{{ next }}" />
 </form>
-</body>
 
 {% endblock %}

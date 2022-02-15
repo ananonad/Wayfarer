@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'nav.html' %}
+    <div class="container-fluid wayfarer">
+        <div class="col-md-5 placelist wayfarer topspace">
+            {% for planet in planets %}
+            <a class="container-fluid wayfarer" href="/wayfarer/{{planet.name}}">
+                <img class="wayfarerphoto" src="{{planet.img}}" alt="{{planet.name}}"/>
+                <h2 class="planetname">{{planet.name}}</h2>
+            </a>
+            <div class="btn-toolbar pull-right" role="toolbar" aria-label="...">
+                <div class="btn-group btn-lg buttonoverride" role="group" aria-label="...">
+                    <a href="#" class="glyphicon posticons glyphicon-plus" aria-hidden="true"></a>
+                </div>
+                <div class="btn-group btn-lg buttonoverride" role="group" aria-label="...">
+                    <a href="#" class="glyphicon posticons glyphicon-heart" aria-hidden="true"></a>
+                </div>
+                <div class="btn-group btn-lg buttonoverride" role="group" aria-label="...">
+                    <a href="#" class="glyphicon posticons glyphicon-bookmark" aria-hidden="true"></a>
+                </div>
+                <div class="btn-group btn-lg buttonoverride" role="group" aria-label="...">
+                    <a href="#" class="glyphicon posticons glyphicon-share" aria-hidden="true"></a>
+                </div>
+                <div class="btn-group btn-lg buttonoverride" role="group" aria-label="...">
+                    <a href="/{{planet.name}}/update/" class="glyphicon posticons glyphicon-edit" aria-hidden="true"></a>
+                </div>
+                <div class="btn-group btn-lg buttonoverride" role="group" aria-label="...">
+                    <a href="/{{planet.name}}/delete/" class="glyphicon posticons glyphicon-trash" aria-hidden="true"></a>
+                </div>
+            </div>
+            {% empty %}
+            <p>No Planets Available</p>
+            {% endfor %}
+        </div>
+        <div class="col-md-7 postdetails">
+        </div>
+    </div>
+</body>
+{% endblock %}

@@ -9,7 +9,7 @@ class Planet(models.Model):
     bio = models.TextField(max_length=500)
     verified_planet = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    #user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -18,14 +18,18 @@ class Planet(models.Model):
         ordering = ['name']
 
 
-# class Profile(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     favorite_color = models.CharField(max_length=50)
-
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
+    bio = models.TextField()
+    def __str__(self):
+        return self.user.username
 #class User(AbstractUser):
+
 
 class Comment(models.Model):
 
     name = models.CharField(max_length=100)
     title = models.CharField(max_length=100)
     comment = models.TextField(max_length=750)
+   
