@@ -2,11 +2,12 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from platformdirs import user_cache_dir
 from django.shortcuts import redirect
 from django.shortcuts import render
+from django.urls import reverse
 from .models import Planet
 from django.views import View 
-from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
@@ -27,12 +28,12 @@ class Home(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         name = self.request.GET.get("name")
-        if name != None:
-            context["planets"] = Planet.objects.filter(name__icontains=name)
-            context["header"] = f"Searching for {name}"
-        else:
-            context["planets"] = Planet.objects.all()
-            context["header"] = "Trending Planets"
+        # if name != None:
+        #     context["planets"] = Planet.objects.filter(name__icontains=name, user=self.request.user)
+        #     context["header"] = f"Searching for {name}"
+        # else:
+        #     context["planets"] = Planet.objects.all(user=self.request.user)
+        #     context["header"] = "Trending Planets"
         return context
 
 class List(TemplateView):
