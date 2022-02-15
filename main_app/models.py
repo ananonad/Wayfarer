@@ -9,7 +9,7 @@ class Planet(models.Model):
     bio = models.TextField(max_length=500)
     verified_planet = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -18,8 +18,8 @@ class Planet(models.Model):
         ordering = ['name']
 
 
-# class Profile(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 #     avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
 #     bio = models.TextField()
 
