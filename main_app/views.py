@@ -6,7 +6,7 @@ from platformdirs import user_cache_dir
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
-from .models import Planet
+from .models import Planet, Profile
 from django.views import View 
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -21,6 +21,10 @@ class About(TemplateView):
 class Index(TemplateView):
     template_name = "index.html"
 
+
+
+
+@method_decorator(login_required, name='dispatch')
 
 class Home(TemplateView):
     template_name = "home.html"
@@ -40,7 +44,6 @@ def profile(request):
     return render(request, 'edit_user.html')
 
 
-@method_decorator(login_required, name='dispatch')
 
 class List(TemplateView):
     template_name = "list.html"
@@ -48,10 +51,10 @@ class List(TemplateView):
         context = super().get_context_data(**kwargs)
         name = self.request.GET.get("name")
         if name != None:
-            context["planets"] = Planet.objects.filter(name__icontains=name, user=self.request.user)
+            context["planets"] = Planet.objects.filter(name__icontains=name)
             context["header"] = f"Searching for {name}"
         else:
-            context["planets"] = Planet.objects.all(user=self.request.user)
+            context["planets"] = Planet.objects.all()
             context["header"] = "Trending Planets"
         return context
 
