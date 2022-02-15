@@ -35,6 +35,12 @@ class Home(TemplateView):
         #     context["planets"] = Planet.objects.all(user=self.request.user)
         #     context["header"] = "Trending Planets"
         return context
+        
+@login_required
+def profile(request):
+    return render(request, 'edit_user.html')
+
+
 
 class List(TemplateView):
     template_name = "list.html"
@@ -70,6 +76,8 @@ class Delete(DeleteView):
     template_name = "delete.html"
     success_url = "/home/"
 
+
+
 class Signup(View):
     def get(self, request):
         form = UserCreationForm()
@@ -80,7 +88,7 @@ class Signup(View):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect("spacefarer_list")
+            return redirect("list")
         else:
             context = {"form": form}
             return render(request, "registration/signup.html", context)
