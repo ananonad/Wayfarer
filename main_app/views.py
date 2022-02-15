@@ -80,7 +80,7 @@ class Signup(View):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect("spacefarer_list")
+            return redirect("home.html")
         else:
             context = {"form": form}
             return render(request, "registration/signup.html", context)

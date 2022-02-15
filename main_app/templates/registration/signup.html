@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block content %}
+{% include 'nav.html' %}
 
 <h1 class="title">Sign Up</h1>
 <form method="post" action="{% url 'signup' %}">
