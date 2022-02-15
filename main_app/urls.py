@@ -2,13 +2,13 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-     path('', views.Home.as_view(), name="spacefarer"),
+     path('', views.Landing.as_view(), name="landing"),
      path('about/', views.About.as_view(), name="about"),
-     path('index/', views.Index.as_view(), name="index"),
-     path('wayfarer/', views.WayfarerList.as_view(), name="wayfarer_list"),
-     path('wayfarer/new/', views.WayfarerCreate.as_view(), name="wayfarer_create"),
-     path('wayfarer/<int:pk>/', views.WayfarerDetail.as_view(), name="wayfarer_detail"),
-     path('wayfarer/<int:pk>/update',views.WayfarerUpdate.as_view(), name="wayfarer_update"),
-     path('wayfarer/<int:pk>/delete',views.WayfarerDelete.as_view(), name="wayfarer_delete"),
+     path('home/', views.Home.as_view(), name="home"),
+     path('list/', views.List.as_view(), name="list"),
+     path('new/', views.Create.as_view(), name="create"),
+     path('<int:pk>/', views.Detail.as_view(), name="detail"),
+     path('<int:pk>/update',views.Update.as_view(), name="update"),
+     path('<int:pk>/delete',views.Delete.as_view(), name="delete"),
      path('accounts/signup/', views.Signup.as_view(), name="signup")
 ]

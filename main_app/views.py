@@ -12,21 +12,19 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 
-class Home(TemplateView):
-    template_name = "spacefarer.html"
-
+class Landing(TemplateView):
+    template_name = "landing.html"
 
 class About(TemplateView):
     template_name = "about.html"
 
-
 class Index(TemplateView):
     template_name = "index.html"
 
-
 @method_decorator(login_required, name='dispatch')
-class WayfarerList(TemplateView):
-    template_name = "spacefarer_list.html"
+
+class Home(TemplateView):
+    template_name = "home.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         name = self.request.GET.get("name")
@@ -38,26 +36,39 @@ class WayfarerList(TemplateView):
         #     context["header"] = "Trending Planets"
         return context
 
-class WayfarerCreate(CreateView):
+class List(TemplateView):
+    template_name = "list.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        name = self.request.GET.get("name")
+        if name != None:
+            context["planets"] = Planet.objects.filter(name__icontains=name)
+            context["header"] = f"Searching for {name}"
+        else:
+            context["planets"] = Planet.objects.all()
+            context["header"] = "Trending Planets"
+        return context
+
+class Create(CreateView):
     model = Planet
     fields = ['name', 'img', 'bio']
-    template_name = "spacefarer_create.html"
-    success_url = "/spacefarer/"
+    template_name = "create.html"
+    success_url = "/home/"
 
-class WayfarerDetail(DetailView):
+class Detail(DetailView):
     model = Planet
-    template_name = "spacefarer_detail.html"
+    template_name = "detail.html"
 
-class WayfarerUpdate(UpdateView):
+class Update(UpdateView):
     model = Planet
     fields = ['name', 'img', 'bio',]
-    template_name = "spacefarer_update.html"
-    success_url = "/spacefarers/"
+    template_name = "update.html"
+    success_url = "/home/"
    
-class WayfarerDelete(DeleteView):
+class Delete(DeleteView):
     model = Planet
-    template_name = "spacefarer_delete_confirmation.html"
-    success_url = "/spacefarers/"
+    template_name = "delete.html"
+    success_url = "/home/"
 
 class Signup(View):
     def get(self, request):
