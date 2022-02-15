@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'nav.html' %}
+    <div>
+        <img class="landingimg" src="https://www.paolini.net/wp-content/uploads/2018/03/1001-future-planet-banner.jpg">
+        <div class="landingtext">
+            <h1 class="landingtitle">Spacefarers</h1>
+            <hr class="landinghr">
+            <h3 class="landingsubtitle">Travel to faraway lands...</h3>
+        </div>
+    </div> 
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <h2 class="aboutblock">Travel Intergalactically</h2>
+                <div class="text-center">
+                    <img class="img-responsive img-thumbnail whatisphoto float-center" src="https://i.natgeofe.com/n/606b9e5c-68cb-49f9-8891-7b8c28919a2e/00000165-672f-d998-adf7-67bf0fd10000_3x2.jpg">
+                </div>
+                <h4 class="text-center abouttext">Soar through the cosmos, exploring planets, stars, and nebulae <em>far</em> beyond the outer limits of this galaxy. </h4>
+            </div>
+            <div class="col-md-4">
+                <h2 class="aboutblock">Discover Worlds Old and New</h2>
+                <div class="text-center">
+                    <img class="img-responsive img-thumbnail whatisphoto float-center" src="https://discovery.sndimg.com/content/dam/images/discovery/editorial/Curiosity/2020/3/Earth-perfec-life-Shutterstock.jpg.rend.hgtvcom.616.347.suffix/1583192498207.jpeg">
+                </div>
+                <h4 class="text-center abouttext">Bored of the gaseous atmosphere of Jupiter and miss home? Document your visit back home to Earth with ease using Spacefarers. </h4>
+            </div>
+            <div class="col-md-4">
+                <h2 class="aboutblock">Connect With Extra-Terrestrials</h2>
+                <div class="text-center">
+                    <img class="img-responsive img-thumbnail whatisphoto float-center" src="https://starwalk.space/gallery/images/mars-the-ultimate-guide/1920x1080.jpg">
+                </div>
+                <h4 class="text-center abouttext">Looking to meet that <em>special someone</em>, but not having much luck on Earth? There are thousands of single Martians, ready to mingle.</h4>
+            </div>
+        </div>
+        <h1 class="abouttitle text-centered">What are you waiting for?</h1>
+        <a class="btn btn-success btn-lg" href="/accounts/signup/">Join <strong>Spacefarers</strong> Now!</a>
+    </div>
+</body>
+{% endblock %}
