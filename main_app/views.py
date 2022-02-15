@@ -58,7 +58,7 @@ class List(TemplateView):
 
 class Create(CreateView):
     model = Planet
-    fields = ['name', 'img', 'bio']
+    fields = ['name', 'img', 'bio', 'verified_planet']
     template_name = "create.html"
     success_url = "/home/"
 
@@ -70,7 +70,8 @@ class Update(UpdateView):
     model = Planet
     fields = ['name', 'img', 'bio',]
     template_name = "update.html"
-    success_url = "/home/"
+    def get_success_url(self):
+        return reverse('detail', kwargs={'pk': self.object.pk})
    
 class Delete(DeleteView):
     model = Planet

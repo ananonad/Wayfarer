@@ -1,10 +1,10 @@
 {% extends 'base.html' %} 
 {% block content %}
 <div class="detail__img">
-    <img src="{{artist.img}}" alt="{{artist.name}}" />
+    <img src="{{planet.img}}" alt="{{planet.name}}" />
 </div>
 <div class="detail__name">
-    {% if artist.verified_artist %}
+    {% if planet.verified_planet %}
     <div class="icon-text">
         <span class="icon has-text-info">
             <i class="fas fa-check-circle"></i>
@@ -12,24 +12,24 @@
         <span>Verified</span>
     </div>
     {% endif %}
-    <h1 class="title">{{artist.name}}</h1>
+    <h1 class="title">{{planet.name}}</h1>
 </div>
 <div class="detail__container">
     <div class="buttons">
-        <a href="" class="button is-info">
+        <a href="{% url 'update' planet.pk %}" <button type="button" class="btn btn-primary">Update</button>
             <span class="icon">
                 <i class="fas fa-edit"></i>
             </span>
         </a>
-        <a href="" class="button is-danger">
+        <a href="{% url 'delete' planet.pk %}" <button type="button" class="btn btn-danger">Delete</button>
             <span class="icon">
                 <i class="fas fa-trash-alt"></i>
             </span>
         </a>
     </div>
     <div class="detail__about">
-        <h4 class="title is-4">About</h4>
-        <p>{{artist.bio}}</p>
+        <h4 class="title is-4">Ab</h4>
+        <p>{{planet.bio}}</p>
     </div>
 </div>
 
