@@ -21,7 +21,6 @@ class About(TemplateView):
 class Index(TemplateView):
     template_name = "index.html"
 
-@method_decorator(login_required, name='dispatch')
 
 class Home(TemplateView):
     template_name = "home.html"
@@ -41,6 +40,7 @@ def profile(request):
     return render(request, 'edit_user.html')
 
 
+@method_decorator(login_required, name='dispatch')
 
 class List(TemplateView):
     template_name = "list.html"
@@ -48,10 +48,10 @@ class List(TemplateView):
         context = super().get_context_data(**kwargs)
         name = self.request.GET.get("name")
         if name != None:
-            context["planets"] = Planet.objects.filter(name__icontains=name)
+            context["planets"] = Planet.objects.filter(name__icontains=name, user=self.request.user)
             context["header"] = f"Searching for {name}"
         else:
-            context["planets"] = Planet.objects.all()
+            context["planets"] = Planet.objects.all(user=self.request.user)
             context["header"] = "Trending Planets"
         return context
 
@@ -60,6 +60,12 @@ class Create(CreateView):
     fields = ['name', 'img', 'bio']
     template_name = "create.html"
     success_url = "/home/"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(Create, self).form_valid(form)
+    def get_success_url(self):
+        return reverse('detail', kwargs={'pk': self.object.pk})
 
 class Detail(DetailView):
     model = Planet
