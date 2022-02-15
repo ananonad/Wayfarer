@@ -57,8 +57,50 @@ label {
     height: fit-content;
 }
 .postdetails {
+    background-image: url("https://snappygoat.com/b/e180cb63bb63dabbfdce2085a6d95dbd92e994e0");
+    min-height: 200vh;
+    height: fit-content;
+    border-color: #0e0f0f;
+    border-width: 2vh;
+    border-style: solid;
+}
+.postphoto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden
+}
+.postphoto img {
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%
+}
+.postcontent {
+    height: fit-content;
     background-color: #0e0f0f;
-    height: 500vh;
+    opacity: 80%;
+}
+.post {
+    color: ivory;
+}
+.postimage {
+    margin-left: 15px;
+    border: ivory;
+    border-radius: 3px;
+    border-width: 2px;
+    border-style: solid;
+}
+.postname {
+    margin-top: 0;
+    font-size: 3.5vh;
+}
+.posttitle {
+    margin-top: 0;
+    font-size: 3vh;
+}
+.posttext {
+    margin: 0 0 5vh;
+    font-size: 2.75vh;
 }
 .wayfarer {
     margin-left:0! important;
@@ -100,6 +142,9 @@ label {
 .topspace {
     margin-top: 7vh;
 }
+.extratopspace {
+    margin-top: 10vh;
+}
 .darkerplease {
     background-color: #0e0f0f! important;
 }
@@ -117,4 +162,21 @@ a:hover {
     bottom: 36px;
     right: 8px;
     margin-bottom: -33px;
+}
+.homesplash {
+    color: ivory;
+    font-size: 6vh;
+}
+.subhomesplash {
+    color: ivory;
+    font-size: 4vh;
+    margin: 0 0 5vh;
+}
+.trendingpostcontain {
+    margin: 0 0 5vh;
+}
+.trendingtitle {
+    color: ivory;
+    font-size: 4vh;
+    margin-top: 2vh;
 }
