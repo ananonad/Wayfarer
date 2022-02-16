@@ -73,7 +73,7 @@ class List(TemplateView):
 
 class Create(CreateView):
     model = Planet
-    fields = ['name', 'img', 'bio']
+    fields = ['name', 'img', 'bio', 'verified_planet']
     template_name = "create.html"
     success_url = "/home/"
 
@@ -120,7 +120,8 @@ class Update(UpdateView):
     model = Planet
     fields = ['name', 'img', 'bio',]
     template_name = "update.html"
-    success_url = "/home/"
+    def get_success_url(self):
+        return reverse('detail', kwargs={'pk': self.object.pk})
    
 class Delete(DeleteView):
     model = Planet
@@ -129,3 +130,37 @@ class Delete(DeleteView):
 
 
 
+<<<<<<< HEAD
+=======
+class Signup(View):
+    def get(self, request):
+        form = UserCreationForm()
+        context = {"form": form}
+        return render(request, "registration/signup.html", context)
+    def post(self, request):
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("home.html")
+        else:
+            context = {"form": form}
+            return render(request, "registration/signup.html", context)
+
+# class CommentCreate(CreateView):
+#     model = Comment
+#     fields = ['name', 'title', 'comment']
+#     template_name = "comment_create.html"
+#     success_url = "/spacefarers/"
+
+# class CommentUpdate(UpdateView):
+#     model = Comment
+#     fields = ['name', 'title', 'comment',]
+#     template_name = "comment_update.html"
+#     success_url = "/spacefarers/"
+
+# class CommentDelete(DeleteView):
+#     model = Comment
+#     template_name = "comment_delete_confirmation.html"
+#     success_url = "/spacefarers/"
+>>>>>>> 803dcd1b772b62d7fb90e11c1d4b1ffb08497504

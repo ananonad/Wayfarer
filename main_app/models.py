@@ -9,7 +9,7 @@ class Planet(models.Model):
     bio = models.TextField(max_length=500)
     verified_planet = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.name
