@@ -6,7 +6,7 @@ from platformdirs import user_cache_dir
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
-from .models import Planet
+from .models import Planet, Comment
 from django.views import View 
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -95,19 +95,19 @@ class Signup(View):
             context = {"form": form}
             return render(request, "registration/signup.html", context)
 
-# class CommentCreate(CreateView):
-#     model = Comment
-#     fields = ['name', 'title', 'comment']
-#     template_name = "comment_create.html"
-#     success_url = "/spacefarers/"
+class CommentCreate(CreateView):
+    model = Comment
+    fields = ['name', 'title', 'comment']
+    template_name = "comment_create.html"
+    success_url = "/home/"
 
-# class CommentUpdate(UpdateView):
-#     model = Comment
-#     fields = ['name', 'title', 'comment',]
-#     template_name = "comment_update.html"
-#     success_url = "/spacefarers/"
+class CommentUpdate(UpdateView):
+    model = Comment
+    fields = ['name', 'title', 'comment',]
+    template_name = "comment_update.html"
+    success_url = "/home/"
 
-# class CommentDelete(DeleteView):
-#     model = Comment
-#     template_name = "comment_delete_confirmation.html"
-#     success_url = "/spacefarers/"
+class CommentDelete(DeleteView):
+    model = Comment
+    template_name = "comment_delete_confirmation.html"
+    success_url = "/home/"

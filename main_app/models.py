@@ -32,4 +32,6 @@ class Comment(models.Model):
     name = models.CharField(max_length=100)
     title = models.CharField(max_length=100)
     comment = models.TextField(max_length=750)
-   
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
+    def __str__(self):
+        return self.title
