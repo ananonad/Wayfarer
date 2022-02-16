@@ -15,6 +15,7 @@ urlpatterns = [
      path('profile/create',  views.ProfileCreate.as_view(), name="create_profile"),
      path('<int:pk>/profile/update/', views.ProfileUpdate.as_view(), name="update_profile"),
      path('<int:pk>/profile/detail/', views.ProfileDetail.as_view(), name="detail_profile"),
-     path('', views.logout, name="logout")
-
+     path('', views.logout, name="logout"),
+     path('<int:pk>/comments/new/', views.CommentCreate.as_view(), name="comment_create")
 ]
+

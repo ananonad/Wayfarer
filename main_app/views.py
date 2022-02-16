@@ -6,8 +6,7 @@ from platformdirs import user_cache_dir
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
-from .models import Planet, Profile, User
-from django.contrib.auth.models import User
+from .models import Planet, Comment, Profile, User
 from django.views import View 
 from django.views.generic import TemplateView, DetailView, CreateView, UpdateView, DeleteView
 from django import forms
@@ -127,6 +126,16 @@ class ProfileUpdate(UpdateView):
 class Detail(DetailView):
     model = Planet
     template_name = "detail.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        name = self.request.GET.get("name")
+        if name != None:
+            context["planets"] = Planet.objects.filter(name__icontains=name)
+            context["header"] = f"Searching for {name}"
+        else:
+            context["planets"] = Planet.objects.all()
+            context["header"] = "Trending Planets"
+        return context
 
 class Update(UpdateView):
     model = Planet
@@ -147,19 +156,28 @@ def logoutuser(request):
     return render ('home.html')
 
 
-# class CommentCreate(CreateView):
-#     model = Comment
-#     fields = ['name', 'title', 'comment']
-#     template_name = "comment_create.html"
-#     success_url = "/spacefarers/"
+class CommentCreate(CreateView):
+    model = Comment
+    fields = ['user', 'title', 'comment']
+    template_name = "comment_create.html"
+    def post(self, request, pk):
+        user = self.request.user
+        title = request.POST.get("title")
+        comment = request.POST.get("comment")
+        Comment.objects.create(user=user, title=title, comment=comment)
+        return redirect('detail', pk=pk)
 
-# class CommentUpdate(UpdateView):
-#     model = Comment
-#     fields = ['name', 'title', 'comment',]
-#     template_name = "comment_update.html"
-#     success_url = "/spacefarers/"
+class CommentUpdate(UpdateView):
+    model = Comment
+    fields = ['name', 'title', 'comment',]
+    template_name = "comment_update.html"
+    success_url = "/list/"
 
 # class CommentDelete(DeleteView):
 #     model = Comment
 #     template_name = "comment_delete_confirmation.html"
 #     success_url = "/spacefarers/"
+class CommentDelete(DeleteView):
+    model = Comment
+    template_name = "comment_delete_confirmation.html"
+    success_url = "/list/"

@@ -1,5 +1,5 @@
 body {
-    background-color: #131414;
+    background-image: url("https://www.colorhexa.com/131414.png");
 }
 label {
     color: ivory
@@ -57,8 +57,7 @@ label {
     height: fit-content;
 }
 .postdetails {
-    background-image: url("https://st3.depositphotos.com/12371120/19349/i/450/depositphotos_193493152-stock-photo-colorful-watercolor-planets-seamless-pattern.jpg");
-    min-height: 200vh;
+    background-image: url("https://www.colorhexa.com/131414.png");
     height: fit-content;
     border-color: #0e0f0f;
     border-width: 1vh;
@@ -165,7 +164,7 @@ a:hover {
     position: relative;
     bottom: 30px;
     right: 4px;
-    margin-bottom: -25px;
+    margin-bottom: -26.5px;
 }
 .homesplash {
     color: ivory;
@@ -186,4 +185,13 @@ a:hover {
     font-size: 4vh;
     margin-top: 2vh;
     filter: drop-shadow(.25rem .25rem .2rem black);
+}
+.details {
+    margin-left: 0px;
+}
+.detail__container {
+    margin-left: -45px;
+}
+.detailtopspace {
+    padding-top: 4vh;
 }
