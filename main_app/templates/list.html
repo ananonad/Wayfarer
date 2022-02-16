@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'nav.html' %}
+    <div">
+        <div class="col-md-12 placelist topspace wayfarer">
+            {% for planet in planets %}
+            <a class="container-fluid wayfarer" href="/wayfarer/{{planet.name}}">
+                <img class="listphoto" src="{{planet.img}}" alt="{{planet.name}}"/>
+                <h2 class="planetname">{{planet.name}}</h2>
+            </a>
+            {% empty %}
+            <h1>There's nothing here!</h1>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+{% endblock %}

@@ -1,27 +1,44 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="container">
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                  <a class="navbar-brand" href="#">Spacefarers</a>
+{% include 'nav.html' %}
+    <div class="container-fluid wayfarer">
+        <div class="col-md-5 placelist wayfarer topspace">
+            {% for planet in planets %}
+            <a class="container-fluid wayfarer" href="/wayfarer/{{planet.name}}">
+                <img class="wayfarerphoto" src="{{planet.img}}" alt="{{planet.name}}"/>
+                <h2 class="planetname">{{planet.name}}</h2>
+            </a>
+            <div class="btn-toolbar pull-right" role="toolbar" aria-label="...">
+                <div class="btn-group btn-lg buttonoverride" role="group" aria-label="...">
+                    <a href="#" class="glyphicon posticons glyphicon-plus" aria-hidden="true"></a>
                 </div>
-                <ul class="nav navbar-nav">
-                  <li class="active"><a href="/">Home Base</a></li>
-                  <li><a href="/about/">About</a></li>
-                  <li><a href="/index/">Index</a></li>
-                  <form class="navbar-form navbar-right">
-                    <div class="form-group">
-                        <input class="form-control" type="email" placeholder="E-mail">
-                    </div>
-                      <div class="form-group">
-                          <input class="form-control" type="password" placeholder="Password">
-                      </div>
-                      <button type="submit" class="btn btn-success">Sign In</button>
-                  </form>
-                </ul>
-              </div>
-        </nav>
+                <div class="btn-group btn-lg buttonoverride" role="group" aria-label="...">
+                    <a href="#" class="glyphicon posticons glyphicon-heart" aria-hidden="true"></a>
+                </div>
+                <div class="btn-group btn-lg buttonoverride" role="group" aria-label="...">
+                    <a href="#" class="glyphicon posticons glyphicon-bookmark" aria-hidden="true"></a>
+                </div>
+                <div class="btn-group btn-lg buttonoverride" role="group" aria-label="...">
+                    <a href="#" class="glyphicon posticons glyphicon-share" aria-hidden="true"></a>
+                </div>
+                <div class="btn-group btn-lg buttonoverride" role="group" aria-label="...">
+                    <a href="/{{planet.name}}/update/" class="glyphicon posticons glyphicon-edit" aria-hidden="true"></a>
+                </div>
+                <div class="btn-group btn-lg buttonoverride" role="group" aria-label="...">
+                    <a href="/{{planet.name}}/delete/" class="glyphicon posticons glyphicon-trash" aria-hidden="true"></a>
+                </div>
+            </div>
+            {% empty %}
+            <p>No Planets Available</p>
+            {% endfor %}
+        </div>
+        <div class="col-md-7 postdetails">
+            {% if user.is_authenticated %}
+            <h1 class=“landingtitle”>Welcome: {{user.username}}</h1>
+            {% else %}
+            <h1 class="landingtitle">There's nothing here. :(</h1>
+            {% endif %}
+        </div>
     </div>
 </body>
 {% endblock %}

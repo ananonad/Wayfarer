@@ -1,34 +1,115 @@
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from platformdirs import user_cache_dir
+from django.shortcuts import redirect
 from django.shortcuts import render
-from .models import Place
+from django.urls import reverse
+from .models import Planet, Profile
 from django.views import View 
-from django.http import HttpResponse
 from django.views.generic.base import TemplateView
-   
-class Home(TemplateView):
-    template_name = "home.html"
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import DetailView
 
-#...
+@method_decorator(login_required, name='dispatch')
+
+class ProfileView(View):
+    def get(self, request):
+        form = UserCreationForm()
+        context = {"form": form}
+        return render(request, "profile.html", context)
+    def post(self, request):
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("home.html")
+        else:
+            context = {"form": form}
+            return render(request, "profile.html", context)
+
+class Landing(TemplateView):
+    template_name = "landing.html"
+
 class About(TemplateView):
     template_name = "about.html"
 
-#...
 class Index(TemplateView):
     template_name = "index.html"
 
-class Planet:
-    def __init__(self, name, img, bio):
-        self.name = name
-        self.img = img
-        self.bio = bio
 
-planets = [
-    Planet("Mercury", "https://i.natgeofe.com/n/606b9e5c-68cb-49f9-8891-7b8c28919a2e/00000165-672f-d998-adf7-67bf0fd10000_3x2.jpg", "Welcome to the first planet of our solar system. Its deemed the first planet because it is the closet planet to our sun. Which also makes it extremely hot with an average temperatures of 430 degrees celsius during the day and 170 degrees celsius at night. Fun fact this is also the fastest moving planet in our solar system, revolving around the sun in 88 days."),
-    Planet("Venus", "https://nypost.com/wp-content/uploads/sites/2/2021/11/astrology-venus-1a.jpg?quality=80&strip=all", "Now we mocve on to the second planet of our solar system Venus. Named after the infamous Venus Williams because it is the hottest planet. Even though Mercury is closer to the sun Venus is hotter because of sulfric acids clouds that trap the heat."),
-    Planet("Earth" "https://discovery.sndimg.com/content/dam/images/discovery/editorial/Curiosity/2020/3/Earth-perfec-life-Shutterstock.jpg.rend.hgtvcom.616.347.suffix/1583192498207.jpeg", "On the the next on Earth there isnt really much to explain here simply the best planet there is in everyone opinon, has a bunch of weird species running around all the time especially those humans they're super weird."),
-    Planet("Mars" "https://starwalk.space/gallery/images/mars-the-ultimate-guide/1920x1080.jpg", "On the the next on Earth there isnt really much to explain here simply the best planet there is in everyone opinon, has a bunch of weird species running around all the time especially those humans they're super weird."),
-    Planet("Jupiter" "https://ak.picdn.net/shutterstock/videos/5290616/thumb/1.jpg", "On the the next on Earth there isnt really much to explain here simply the best planet there is in everyone opinon, has a bunch of weird species running around all the time especially those humans they're super weird."),
-    Planet("Saturn" "https://www.worldatlas.com/r/w1200/upload/f3/0b/52/shutterstock-598786217.jpg", "On the the next on Earth there isnt really much to explain here simply the best planet there is in everyone opinon, has a bunch of weird species running around all the time especially those humans they're super weird."),
-    Planet("Uranus" "https://mediaproxy.salon.com/width/1200/https://media.salon.com/2021/05/planet-uranus-0519211.jpg", "On the the next on Earth there isnt really much to explain here simply the best planet there is in everyone opinon, has a bunch of weird species running around all the time especially those humans they're super weird."),
-    Planet("Neptune" "https://nypost.com/wp-content/uploads/sites/2/2021/11/astrology-neptune-sign-1a.jpg?quality=80&strip=all", "On the the next on Earth there isnt really much to explain here simply the best planet there is in everyone opinon, has a bunch of weird species running around all the time especially those humans they're super weird."),
-    
-]
+
+
+class Home(TemplateView):
+    template_name = "home.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        name = self.request.GET.get("name")
+        if name != None:
+            context["planets"] = Planet.objects.filter(name__icontains=name)
+            context["header"] = f"Searching for {name}"
+        else:
+            context["planets"] = Planet.objects.all()
+            context["header"] = "Trending Planets"
+        return context
+        
+
+
+
+class List(TemplateView):
+    template_name = "list.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        name = self.request.GET.get("name")
+        if name != None:
+            context["planets"] = Planet.objects.filter(name__icontains=name)
+            context["header"] = f"Searching for {name}"
+        else:
+            context["planets"] = Planet.objects.all()
+            context["header"] = "Trending Planets"
+        return context
+
+class Create(CreateView):
+    model = Planet
+    fields = ['name', 'img', 'bio']
+    template_name = "create.html"
+    success_url = "/home/"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(Create, self).form_valid(form)
+    def get_success_url(self):
+        return reverse('detail', kwargs={'pk': self.object.pk})
+
+class Detail(DetailView):
+    model = Planet
+    template_name = "detail.html"
+
+class Update(UpdateView):
+    model = Planet
+    fields = ['name', 'img', 'bio',]
+    template_name = "update.html"
+    success_url = "/home/"
+   
+class Delete(DeleteView):
+    model = Planet
+    template_name = "delete.html"
+    success_url = "/home/"
+
+
+
+class Signup(View):
+    def get(self, request):
+        form = UserCreationForm()
+        context = {"form": form}
+        return render(request, "registration/signup.html", context)
+    def post(self, request):
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("home.html")
+        else:
+            context = {"form": form}
+            return render(request, "registration/signup.html", context)

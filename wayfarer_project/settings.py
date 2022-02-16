@@ -53,6 +53,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'wayfarer_project.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -77,8 +78,8 @@ WSGI_APPLICATION = 'wayfarer_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'wayfarer',
+        'ENGINE': 'django.db.backends.postgresql', 
+        'NAME': 'wayfarer'
     }
 }
 
@@ -124,3 +125,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,'main_app/static')]
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = '/list/'
+LOGOUT_REDIRECT_URL = '/'
