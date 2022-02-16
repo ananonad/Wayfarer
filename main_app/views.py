@@ -1,3 +1,4 @@
+from unicodedata import name
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -6,7 +7,7 @@ from platformdirs import user_cache_dir
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
-from .models import Planet, Profile
+from .models import Planet, Comment, Profile
 from django.views import View 
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -126,19 +127,24 @@ class Signup(View):
             context = {"form": form}
             return render(request, "registration/signup.html", context)
 
-# class CommentCreate(CreateView):
-#     model = Comment
-#     fields = ['name', 'title', 'comment']
-#     template_name = "comment_create.html"
-#     success_url = "/spacefarers/"
+class CommentCreate(CreateView):
+    model = Comment
+    fields = ['user', 'title', 'comment']
+    template_name = "comment_create.html"
+    def post(self, request, pk):
+        user = self.request.user
+        title = request.POST.get("title")
+        comment = request.POST.get("comment")
+        Comment.objects.create(user=user, title=title, comment=comment)
+        return redirect('detail', pk=pk)
 
-# class CommentUpdate(UpdateView):
-#     model = Comment
-#     fields = ['name', 'title', 'comment',]
-#     template_name = "comment_update.html"
-#     success_url = "/spacefarers/"
+class CommentUpdate(UpdateView):
+    model = Comment
+    fields = ['name', 'title', 'comment',]
+    template_name = "comment_update.html"
+    success_url = "/list/"
 
-# class CommentDelete(DeleteView):
-#     model = Comment
-#     template_name = "comment_delete_confirmation.html"
-#     success_url = "/spacefarers/"
+class CommentDelete(DeleteView):
+    model = Comment
+    template_name = "comment_delete_confirmation.html"
+    success_url = "/list/"
