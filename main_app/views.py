@@ -130,22 +130,7 @@ class Delete(DeleteView):
 
 
 
-<<<<<<< HEAD
-=======
-class Signup(View):
-    def get(self, request):
-        form = UserCreationForm()
-        context = {"form": form}
-        return render(request, "registration/signup.html", context)
-    def post(self, request):
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect("home.html")
-        else:
-            context = {"form": form}
-            return render(request, "registration/signup.html", context)
+
 
 # class CommentCreate(CreateView):
 #     model = Comment
@@ -163,4 +148,3 @@ class Signup(View):
 #     model = Comment
 #     template_name = "comment_delete_confirmation.html"
 #     success_url = "/spacefarers/"
->>>>>>> 803dcd1b772b62d7fb90e11c1d4b1ffb08497504
