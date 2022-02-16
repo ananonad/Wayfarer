@@ -99,15 +99,15 @@ class CommentCreate(CreateView):
     model = Comment
     fields = ['name', 'title', 'comment']
     template_name = "comment_create.html"
-    success_url = "/home/"
+    success_url = "/list/"
 
 class CommentUpdate(UpdateView):
     model = Comment
     fields = ['name', 'title', 'comment',]
     template_name = "comment_update.html"
-    success_url = "/home/"
+    success_url = "/list/"
 
 class CommentDelete(DeleteView):
     model = Comment
     template_name = "comment_delete_confirmation.html"
-    success_url = "/home/"
+    success_url = "/list/"
