@@ -1,8 +1,8 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-# from django.utils.decorators import method_decorator
-# from platformdirs import user_cache_dir
+from django.utils.decorators import method_decorator
+from platformdirs import user_cache_dir
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -15,7 +15,6 @@ from django import forms
 
 
  
-
 class Landing(TemplateView):
     template_name = "landing.html"
 
@@ -47,12 +46,17 @@ class Home(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         name = self.request.GET.get("name")
+        print('=====================================================')
+        print(self.request.user)
+        print('=====================================================')
         if name != None:
             context["planets"] = Planet.objects.filter(name__icontains=name)
             context["header"] = f"Searching for {name}"
+            context['profile'] = Profile.objects.filter(user_id=self.request.user)
         else:
             context["planets"] = Planet.objects.all()
             context["header"] = "Trending Planets"
+            context['profile'] = Profile.objects.filter(user_id=self.request.user)
         return context
         
 
@@ -89,27 +93,35 @@ class ProfileCreate(CreateView):
     model = Profile
     fields = ['img', 'location', 'bio']
     template_name = 'create_profile.html'
-
-    def get_success_url(self):
-        return reverse('detail_profile', kwargs={'pk': self.object.pk})
+    current_user = User.id
+    success_url = f"/list/{current_user}"
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['profile'] = Profile.objects.filter()
+        return context
+
 class ProfileDetail(DetailView):
     model = Profile
     template_name = "detail_profile.html"
 
-    def get_context_dat(self, **kwargs):
-        context = super().get_context_dat(**kwargs)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         context['user'] = User.objects.filter(id = self.kwargs['pk'])
         return context
 
 class ProfileUpdate(UpdateView):
     model = Profile
-    fields = ['img', 'location', 'bio', 'username']
+    fields = ['img', 'location', 'bio', 'name']
     template_name = 'update_profile.html'
+
+    def get_success_url(self):
+        return reverse('detail_profile', kwargs={'pk': self.object.pk})
+
 
 
 class Detail(DetailView):
@@ -130,6 +142,9 @@ class Delete(DeleteView):
 
 
 
+def logoutuser(request):
+    logout(request)
+    return render ('home.html')
 
 
 # class CommentCreate(CreateView):
