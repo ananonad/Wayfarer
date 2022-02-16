@@ -1,6 +1,4 @@
-{% extends 'base.html' %} 
-{% block content %}
-{% include 'nav.html'}
+{% extends 'base.html' %} {% block content %}
 <h1 class="title pt-5">Are you sure you want to Delete {{wayfarer.name}}?</h1>
 <form method="post">
     {% csrf_token %}
@@ -8,7 +6,7 @@
     <!-- confirm artist delete -->
         <input class="button is-danger" type="submit" value="Confirm" />
         <!-- Redirect back to detail on cancel -->
-        <a class="button is-primary" href="{% url 'detail' planet.pk %}">Cancel</a>
+        <a class="button is-primary" href="{% url 'wayfarer_detail' profile.pk %}">Cancel</a>
     </div>
 </form>
 {% endblock %}

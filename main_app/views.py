@@ -11,6 +11,7 @@ from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
+from django.urls import reverse
 
 @method_decorator(login_required, name='dispatch')
 
@@ -72,7 +73,7 @@ class List(TemplateView):
 
 class Create(CreateView):
     model = Planet
-    fields = ['name', 'img', 'bio']
+    fields = ['name', 'img', 'bio', 'verified_planet']
     template_name = "create.html"
     success_url = "/home/"
 
@@ -90,7 +91,8 @@ class Update(UpdateView):
     model = Planet
     fields = ['name', 'img', 'bio',]
     template_name = "update.html"
-    success_url = "/home/"
+    def get_success_url(self):
+        return reverse('detail', kwargs={'pk': self.object.pk})
    
 class Delete(DeleteView):
     model = Planet
@@ -113,3 +115,20 @@ class Signup(View):
         else:
             context = {"form": form}
             return render(request, "registration/signup.html", context)
+
+# class CommentCreate(CreateView):
+#     model = Comment
+#     fields = ['name', 'title', 'comment']
+#     template_name = "comment_create.html"
+#     success_url = "/spacefarers/"
+
+# class CommentUpdate(UpdateView):
+#     model = Comment
+#     fields = ['name', 'title', 'comment',]
+#     template_name = "comment_update.html"
+#     success_url = "/spacefarers/"
+
+# class CommentDelete(DeleteView):
+#     model = Comment
+#     template_name = "comment_delete_confirmation.html"
+#     success_url = "/spacefarers/"
