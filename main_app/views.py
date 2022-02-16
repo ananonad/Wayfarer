@@ -7,12 +7,29 @@ from platformdirs import user_cache_dir
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
-from .models import Planet, Comment
+from .models import Planet, Comment, Profile
 from django.views import View 
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.urls import reverse
+
+@method_decorator(login_required, name='dispatch')
+
+class ProfileView(View):
+    def get(self, request):
+        form = UserCreationForm()
+        context = {"form": form}
+        return render(request, "profile.html", context)
+    def post(self, request):
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("home.html")
+        else:
+            context = {"form": form}
+            return render(request, "profile.html", context)
 
 class Landing(TemplateView):
     template_name = "landing.html"
@@ -23,7 +40,8 @@ class About(TemplateView):
 class Index(TemplateView):
     template_name = "index.html"
 
-@method_decorator(login_required, name='dispatch')
+
+
 
 class Home(TemplateView):
     template_name = "home.html"
@@ -38,9 +56,6 @@ class Home(TemplateView):
             context["header"] = "Trending Planets"
         return context
         
-@login_required
-def profile(request):
-    return render(request, 'edit_user.html')
 
 
 
@@ -63,9 +78,25 @@ class Create(CreateView):
     template_name = "create.html"
     success_url = "/home/"
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(Create, self).form_valid(form)
+    def get_success_url(self):
+        return reverse('detail', kwargs={'pk': self.object.pk})
+
 class Detail(DetailView):
     model = Planet
     template_name = "detail.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        name = self.request.GET.get("name")
+        if name != None:
+            context["planets"] = Planet.objects.filter(name__icontains=name)
+            context["header"] = f"Searching for {name}"
+        else:
+            context["planets"] = Planet.objects.all()
+            context["header"] = "Trending Planets"
+        return context
 
 class Update(UpdateView):
     model = Planet

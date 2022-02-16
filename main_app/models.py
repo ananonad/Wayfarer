@@ -20,6 +20,11 @@ class Planet(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    address = models.CharField(max_length=50)
+    # avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
+    
+
+#class User(AbstractUser):
     avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
     bio = models.TextField()
     def __str__(self):

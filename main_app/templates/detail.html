@@ -1,37 +1,85 @@
 {% extends 'base.html' %} 
 {% block content %}
-<div class="detail__img">
-    <img src="{{planet.img}}" alt="{{planet.name}}" />
-</div>
-<div class="detail__name">
-    {% if planet.verified_planet %}
-    <div class="icon-text">
-        <span class="icon has-text-info">
-            <i class="fas fa-check-circle"></i>
-        </span>
-        <span>Verified</span>
-    </div>
-    {% endif %}
-    <h1 class="title">{{planet.name}}</h1>
-</div>
-<div class="detail__container">
-    <div class="buttons">
-        <a href="{% url 'update' planet.pk %}" <button type="button" class="btn btn-primary">Update</button>
-            <span class="icon">
-                <i class="fas fa-edit"></i>
-            </span>
+{% include 'nav.html' %}
+<div class="container-fluid wayfarer">
+    <div class="col-md-4 placelist wayfarer topspace">
+        <a class="container-fluid wayfarer" href="/new/">
+            <img class="wayfarerphoto" src="http://www-scf.usc.edu/~aclarkso/acad275/filmpackage/seamless%20space_0.png" alt="stars"/>
+            <h2 class="planetname">New Destination +</h2>
         </a>
-        <a href="{% url 'delete' planet.pk %}" <button type="button" class="btn btn-danger">Delete</button>
-            <span class="icon">
-                <i class="fas fa-trash-alt"></i>
-            </span>
+        {% for planet in planets %}
+        <a class="container-fluid wayfarer" href="{% url 'detail' planet.pk %}">
+            <img class="wayfarerphoto" src="{{planet.img}}" alt="{{planet.name}}"/>
+            <h2 class="planetname">{{planet.name}}</h2>
         </a>
+        <div class="btn-toolbar pull-right" role="toolbar" aria-label="...">
+            <div class="btn-group btn-lg buttonoverride" role="group" aria-label="...">
+                <a href="{% url 'detail' planet.pk %}update/" class="glyphicon posticons glyphicon-edit" aria-hidden="true"></a>
+            </div>
+            <div class="btn-group btn-lg buttonoverride" role="group" aria-label="...">
+                <a href="{% url 'detail' planet.pk %}delete/" class="glyphicon posticons glyphicon-trash" aria-hidden="true"></a>
+            </div>
+        </div>
+        {% empty %}
+        <p>No Planets Available</p>
+        {% endfor %}
     </div>
-    <div class="detail__about">
-        <h4 class="title is-4">Ab</h4>
-        <p>{{planet.bio}}</p>
+    <div class="col-md-8 postdetails topspace">
+        <div class="row">
+            <div class="detailtopspace col-md-5">
+                <img class="img-responsive" src="{{planet.img}}" alt="{{planet.name}}" />
+            </div>
+            <div class="container details col-md-7">
+                <div class="detail__name row">
+                    <h1 class=" title homesplash">{{planet.name}}</h1>
+                </div>
+                <div class="detail__container row">
+                    <div class="detail__about">
+                        <h4 class="abouttext">{{planet.bio}}</h4>
+                    </div>
+                </div>
+                <br>
+                <div class="buttons row">
+                    <a href="{% url 'update' planet.pk %}"> <button type="button" class="btn btn-primary">Update</button>
+                        <span class="icon">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                    </a>
+                    <a href="{% url 'delete' planet.pk %}"> <button type="button" class="btn btn-danger">Delete</button>
+                        <span class="icon">
+                            <i class="fas fa-trash-alt"></i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <br>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="container-fluid">
+                <h3 class="trendingtitle trendingpostcontain">Trending posts from {{planet.name}}:</h3>
+            </div>
+            {% for planet in planets %}
+            <!-- ^^^ THIS WILL BE USERS THAT POSTED TO THAT PLANET!!! ^^^ -->
+            <div class="postcontain row">
+                <div class="col-md-2">
+                    <img class="img-responsive postimage" src="{{planet.img}}" alt="{{planet.name}}"/>
+                </div>
+                <div class="post col-md-10">
+                    <div class="col-md-10 row">
+                        <h3 class="postname">{{planet.name}} says:</h3>
+                    </div>
+                    <div class="post col-md-10 row">
+                        <h3 class="posttitle">Hello, example title...</h3>
+                    </div>
+                    <div class="post col-md-10 row">
+                        <h4 class="posttext">Wait, I'm a planet, not a user!? Yeah, this is just an example. We don't actually have any content yet... Be patient! It's coming soon.</h4>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
        {%include "comment_create.html"%}{%include "comment_update.html"%}  
 </div>
-
 {% endblock %}

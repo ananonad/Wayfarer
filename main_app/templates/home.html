@@ -2,42 +2,68 @@
 {% block content %}
 {% include 'nav.html' %}
     <div class="container-fluid wayfarer">
-        <div class="col-md-5 placelist wayfarer topspace">
+        <div class="col-md-4 placelist wayfarer topspace">
+            <a class="container-fluid wayfarer" href="/new/">
+                <img class="wayfarerphoto" src="http://www-scf.usc.edu/~aclarkso/acad275/filmpackage/seamless%20space_0.png" alt="stars"/>
+                <h2 class="planetname">New Destination +</h2>
+            </a>
             {% for planet in planets %}
-            <a class="container-fluid wayfarer" href="/wayfarer/{{planet.name}}">
+            <a class="container-fluid wayfarer" href="{% url 'detail' planet.pk %}">
                 <img class="wayfarerphoto" src="{{planet.img}}" alt="{{planet.name}}"/>
                 <h2 class="planetname">{{planet.name}}</h2>
             </a>
             <div class="btn-toolbar pull-right" role="toolbar" aria-label="...">
                 <div class="btn-group btn-lg buttonoverride" role="group" aria-label="...">
-                    <a href="#" class="glyphicon posticons glyphicon-plus" aria-hidden="true"></a>
+                    <a href="{% url 'detail' planet.pk %}update/" class="glyphicon posticons glyphicon-edit" aria-hidden="true"></a>
                 </div>
                 <div class="btn-group btn-lg buttonoverride" role="group" aria-label="...">
-                    <a href="#" class="glyphicon posticons glyphicon-heart" aria-hidden="true"></a>
-                </div>
-                <div class="btn-group btn-lg buttonoverride" role="group" aria-label="...">
-                    <a href="#" class="glyphicon posticons glyphicon-bookmark" aria-hidden="true"></a>
-                </div>
-                <div class="btn-group btn-lg buttonoverride" role="group" aria-label="...">
-                    <a href="#" class="glyphicon posticons glyphicon-share" aria-hidden="true"></a>
-                </div>
-                <div class="btn-group btn-lg buttonoverride" role="group" aria-label="...">
-                    <a href="/{{planet.name}}/update/" class="glyphicon posticons glyphicon-edit" aria-hidden="true"></a>
-                </div>
-                <div class="btn-group btn-lg buttonoverride" role="group" aria-label="...">
-                    <a href="/{{planet.name}}/delete/" class="glyphicon posticons glyphicon-trash" aria-hidden="true"></a>
+                    <a href="{% url 'detail' planet.pk %}delete/" class="glyphicon posticons glyphicon-trash" aria-hidden="true"></a>
                 </div>
             </div>
             {% empty %}
             <p>No Planets Available</p>
             {% endfor %}
         </div>
-        <div class="col-md-7 postdetails">
-            {% if user.is_authenticated %}
-            <h1 class=“landingtitle”>Welcome: {{user.username}}</h1>
-            {% else %}
-            <h1 class="landingtitle">There's nothing here. :(</h1>
-            {% endif %}
+        <div class="col-md-8 postdetails">
+            <div class="container-fluid row text-center">
+                <h3 class="extratopspace homesplash">Welcome back, <em>{{user.username}}!</em></h3>
+            </div> 
+            <div class="container-fluid row text-center">
+                <h4 class="large subhomesplash">Let's catch you up to speed:</h4>
+            </div>
+            {% for planet in planets %}
+            <div class="container-fluid trendingpostcontain row">
+                <div class="col-md-3 postphoto">
+                    <img class="img-thumbnail" src="{{planet.img}}" alt="{{planet.name}}"/>
+                </div>
+                <div class="col-md-9 wayfarer postcontent">
+                    <div class="container-fluid">
+                        <h3 class="trendingtitle trendingpostcontain">Trending posts from {{planet.name}}:</h3>
+                    </div>
+                    {% for planet in planets %}
+                    <!-- ^^^ THIS WILL BE USERS THAT POSTED TO THAT PLANET!!! ^^^ -->
+                    <div class="postcontain row">
+                        <div class="col-md-2">
+                            <img class="img-responsive postimage" src="{{planet.img}}" alt="{{planet.name}}"/>
+                        </div>
+                        <div class="post col-md-10">
+                            <div class="col-md-10 row">
+                                <h3 class="postname">{{planet.name}} says:</h3>
+                            </div>
+                            <div class="post col-md-10 row">
+                                <h3 class="posttitle">Hello, example title...</h3>
+                            </div>
+                            <div class="post col-md-10 row">
+                                <h4 class="posttext">Wait, I'm a planet, not a user!? Yeah, this is just an example. We don't actually have any content yet... Be patient! It's coming soon.</h4>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% empty %}
+            <h2>There are no posts to display.</h2>
+            {% endfor %}
         </div>
     </div>
 </body>
