@@ -57,8 +57,53 @@ label {
     height: fit-content;
 }
 .postdetails {
+    background-image: url("https://st3.depositphotos.com/12371120/19349/i/450/depositphotos_193493152-stock-photo-colorful-watercolor-planets-seamless-pattern.jpg");
+    min-height: 200vh;
+    height: fit-content;
+    border-color: #0e0f0f;
+    border-width: 1vh;
+    border-style: solid;
+}
+.postphoto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden
+}
+.postphoto img {
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%
+}
+.postcontent {
+    height: fit-content;
     background-color: #0e0f0f;
-    height: 500vh;
+    opacity: 80%;
+}
+.post {
+    color: ivory;
+}
+.postimage {
+    margin-left: 15px;
+    border: ivory;
+    border-radius: 3px;
+    border-width: 2px;
+    border-style: solid;
+}
+.postname {
+    margin-top: 0;
+    font-size: 3.5vh;
+    filter: drop-shadow(.25rem .25rem .2rem black);
+}
+.posttitle {
+    margin-top: 0;
+    font-size: 3vh;
+    filter: drop-shadow(.25rem .25rem .2rem black);
+}
+.posttext {
+    margin: 0 0 5vh;
+    font-size: 2.75vh;
+    filter: drop-shadow(.25rem .25rem .2rem black);
 }
 .wayfarer {
     margin-left:0! important;
@@ -100,6 +145,9 @@ label {
 .topspace {
     margin-top: 7vh;
 }
+.extratopspace {
+    margin-top: 10vh;
+}
 .darkerplease {
     background-color: #0e0f0f! important;
 }
@@ -109,12 +157,33 @@ a:hover {
 }
 .posticons {
     color: ivory;
+    filter: drop-shadow(.25rem .25rem .75rem black);
 }
 .buttonoverride {
-    padding: 0 8px;
-    font-size: 25px;
+    padding: 0 4px;
+    font-size: 20px;
     position: relative;
-    bottom: 36px;
-    right: 8px;
-    margin-bottom: -33px;
+    bottom: 30px;
+    right: 4px;
+    margin-bottom: -25px;
+}
+.homesplash {
+    color: ivory;
+    font-size: 6vh;
+    filter: drop-shadow(1rem 1rem .5rem black);
+}
+.subhomesplash {
+    color: ivory;
+    font-size: 4vh;
+    margin: 0 0 5vh;
+    filter: drop-shadow(-1rem 1rem .5rem black);
+}
+.trendingpostcontain {
+    margin: 0 0 5vh;
+}
+.trendingtitle {
+    color: ivory;
+    font-size: 4vh;
+    margin-top: 2vh;
+    filter: drop-shadow(.25rem .25rem .2rem black);
 }
