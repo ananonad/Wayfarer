@@ -1,3 +1,4 @@
+from unicodedata import name
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -97,9 +98,14 @@ class Signup(View):
 
 class CommentCreate(CreateView):
     model = Comment
-    fields = ['name', 'title', 'comment']
+    fields = ['user', 'title', 'comment']
     template_name = "comment_create.html"
-    success_url = "/list/"
+    def post(self, request, pk):
+        user = self.request.user
+        title = request.POST.get("title")
+        comment = request.POST.get("comment")
+        Comment.objects.create(user=user, title=title, comment=comment)
+        return redirect('detail', pk=pk)
 
 class CommentUpdate(UpdateView):
     model = Comment
