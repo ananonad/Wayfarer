@@ -38,3 +38,19 @@ class User(models.Model):
 
     def __str__(self):
         return self.username
+
+
+#class User(AbstractUser):
+    avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
+    bio = models.TextField()
+    def __str__(self):
+        return self.user.username
+#class User(AbstractUser):
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
+    title = models.CharField(max_length=100)
+    comment = models.TextField(max_length=750)
+    def __str__(self):
+        return self.title
