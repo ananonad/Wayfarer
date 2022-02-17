@@ -40,12 +40,12 @@ class User(models.Model):
         return self.username
 
 
-#class User(AbstractUser):
-    avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
-    bio = models.TextField()
-    def __str__(self):
-        return self.user.username
-#class User(AbstractUser):
+# #class User(AbstractUser):
+#     avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
+#     bio = models.TextField()
+#     def __str__(self):
+#         return self.user.username
+# #class User(AbstractUser):
 
 
 class Comment(models.Model):
