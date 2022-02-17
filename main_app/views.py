@@ -153,7 +153,7 @@ class Delete(DeleteView):
 
 def logoutuser(request):
     logout(request)
-    return render ('home.html')
+    return render ('landing.html')
 
 
 class CommentCreate(CreateView):
