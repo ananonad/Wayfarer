@@ -1,0 +1,13 @@
+{% extends 'base.html' %} 
+{% block title %}- Delete Profile {% endblock %}
+{% include 'nav.html' %}
+{% block content %}
+<h1 class="title pt-5">Are you sure you want to delete yourself, {{profile.name}}?</h1>
+<form method="post">
+    {% csrf_token %}
+    <div class="buttons">
+        <input class="button is-danger" type="submit" value="Confirm" />
+        <a class="button is-primary" href="{% url 'detail_profile' user.pk %}">Cancel</a>
+    </div>
+</form>
+{% endblock %}
