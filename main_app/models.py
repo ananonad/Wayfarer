@@ -39,6 +39,8 @@ class User(models.Model):
     def __str__(self):
         return self.username
 
+
+
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_comments")
     planet = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name="planet_comments", default=17)
