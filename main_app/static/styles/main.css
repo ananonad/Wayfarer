@@ -12,8 +12,8 @@ label {
 }
 .landingtext {
     position: absolute;
-    top: 40%;
-    left: 50%;
+    bottom: 25%;
+    left: 650px;
     transform: translate(-105%, -45%);
     color: ivory;
     filter: drop-shadow(.25rem .25rem .2rem black);
