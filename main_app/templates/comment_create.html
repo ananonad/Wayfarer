@@ -1,14 +1,39 @@
 {% extends 'base.html' %} 
 {% block content %}
-<h1>Leave a Comment</h1>
+<hr/>
+<div style="padding-left: 50px">
+  <a href="" data-toggle="modal" data-target="#Modalmodal">ADD COMMENT</a>
+  </div>
+  <div class="modal" tabindex="-1" role="dialog" id="Modalmodal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add Comments</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form method="post"
+            enctype="multipart/form-data">
+              <!-- Security Feature  -->
+                {% csrf_token %} 
+              <!--  Generate inputs  -->
+               {{form.as_p}} 
+              <!--  Submit form  -->
+                
+              
+          </div>
+          <div class="modal-footer">
+            <input type="submit" value="Submit" />
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<form method="post">
-<!-- Security Feature  -->
-  {% csrf_token %} 
-<!--  Generate inputs  -->
- {{form.as_p}} 
-<!--  Submit form  -->
-  <input type="submit" value="Submit" />
-</form>
+
+
   
   {% endblock %}
