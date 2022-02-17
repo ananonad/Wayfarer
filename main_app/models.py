@@ -40,7 +40,8 @@ class User(models.Model):
         return self.username
 
 class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_comments")
+    planet = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name="planet_comments", default=17)
     title = models.CharField(max_length=100)
     comment = models.TextField(max_length=750)
     def __str__(self):
