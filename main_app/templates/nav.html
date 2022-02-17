@@ -46,7 +46,7 @@
                         <li><a href="{% url 'update_profile' user.pk %}">Edit Account</a></li>
                         <li><a href="{% url 'detail_profile' user.pk %}">Profile Details</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Delete Account</a></li>
+                        <li><a href="{% url 'profile_delete' user.pk %}">Delete Account</a></li>
                     </ul>
                 </li>
             </ul>

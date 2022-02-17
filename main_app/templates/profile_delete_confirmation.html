@@ -7,7 +7,7 @@
     {% csrf_token %}
     <div class="buttons">
         <input class="button is-danger" type="submit" value="Confirm" />
-        <a class="button is-primary" href="{% url 'profile_detail' user.pk %}">Cancel</a>
+        <a class="button is-primary" href="{% url 'detail_profile' user.pk %}">Cancel</a>
     </div>
 </form>
 {% endblock %}

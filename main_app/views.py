@@ -139,7 +139,7 @@ class ProfileUpdate(UpdateView):
     def get_success_url(self):
         return reverse('detail_profile', kwargs={'pk': self.object.pk})
 
-class ProfielDelete(DeleteView):
+class ProfileDelete(DeleteView):
     model = Profile
     template_name = "profile_delete_confirmation.html"
     success_url = "/home/"

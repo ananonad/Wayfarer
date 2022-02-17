@@ -2,7 +2,7 @@
 {% block title %}- Update {% endblock %}
 {% include 'nav.html' %}
 {% block content %}
-<h1 class="pt-3">Update Profile {{profile.user.username}}</h1>
+<h1 class="pt-3">Update Profile {{user.username}}</h1>
 
 <form method="post">
         {% csrf_token %} 
