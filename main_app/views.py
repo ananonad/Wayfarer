@@ -136,6 +136,10 @@ class Detail(DetailView):
             context["planets"] = Planet.objects.all()
             context["header"] = "Trending Planets"
         return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["comments"] = Comment.objects.all()
+        return context
 
 class Update(UpdateView):
     model = Planet
@@ -158,13 +162,14 @@ def logoutuser(request):
 
 class CommentCreate(CreateView):
     model = Comment
-    fields = ['user','title', 'comment']
+    fields = ['user','title', 'comment', 'planet']
     template_name = "comment_create.html"
     def post(self, request, pk):
         user = User.objects.get(pk=pk)
         title = request.POST.get("title")
         comment = request.POST.get("comment")
-        Comment.objects.create(user=user, title=title, comment=comment)
+        planet = Planet.objects.get(pk=pk)
+        Comment.objects.create(user=user, title=title, comment=comment, planet=planet)
         return redirect('landing')
         
 class CommentUpdate(UpdateView):
