@@ -28,10 +28,23 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Personalize<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a onclick="defaultwastakenso()">Default</a></li>
+                        <li><a onclick="planets()">Planets</a></li>
+                        <li><a onclick="stars()">Stars</a></li>
+                        <li><a onclick="cartoon()">Cartoon</a></li>
+                        <li><a onclick="vaporwave()">Vaporwave</a></li>
+                        <li><a onclick="cats()">Cats</a></li>
+                        <li><a onclick="tacos()">Tacos</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Log Out</a></li>
-                        <li><a href="#">Edit Account</a></li>
+                        <li><a href="{% url 'logout'%}">Log Out</a></li>
+                        <li><a href="{% url 'update_profile' user.pk %}">Edit Account</a></li>
+                        <li><a href="{% url 'detail_profile' user.pk %}">Profile Details</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">Delete Account</a></li>
                     </ul>
@@ -39,8 +52,8 @@
             </ul>
             {% else %}
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/home/">Log In</a></li>
-                <li><a href="/list/">Sign Up</a></li>
+                <li><a href="{% url 'login'%}">Log In</a></li>
+                <li><a href="{% url 'signup'%}">Sign Up</a></li>
             </ul>
             {% endif %}
         </div>
