@@ -11,12 +11,6 @@ VALUES('Jupiter', 'https://ak.picdn.net/shutterstock/videos/5290616/thumb/1.jpg'
 INSERT INTO main_app_planet(name, img, bio, verified_planet, created_at, user_id)
 VALUES('Saturn', 'https://www.worldatlas.com/r/w1200/upload/f3/0b/52/shutterstock-598786217.jpg', 'Saturn recently became engaged to Neptune, hence the big fancy ring.', 'f', '2021-05-07 18:57:42.517205-07', 1);
 INSERT INTO main_app_planet(name, img, bio, verified_planet, created_at, user_id)
-<<<<<<< HEAD
-VALUES('Uranus', 'https://mediaproxy.salon.com/width/1200/https://media.salon.com/2021/05/planet-uranus-0519211.jpg', 'On the the next on Earth there isnt really much to explain here simply the best planet there is in everyone opinon, has a bunch of weird species running around all the time especially those humans they are super weird.', 'f', '2021-05-07 18:57:42.517205-07', 1);
-INSERT INTO main_app_planet(name, img, bio, verified_planet, created_at, user_id)
-VALUES('Neptune', 'https://nypost.com/wp-content/uploads/sites/2/2021/11/astrology-neptune-sign-1a.jpg?quality=80&strip=all', 'On the the next on Earth there isnt really much to explain here simply the best planet there is in everyone opinon, has a bunch of weird species running around all the time especially those humans they are super weird.', 'f', '2021-05-07 18:57:42.517205-07', 1);
-=======
 VALUES('Uranus', 'https://mediaproxy.salon.com/width/1200/https://media.salon.com/2021/05/planet-uranus-0519211.jpg', 'Uranus, the seventh planet from the Sun, is cold, desolate, and lonely. Uranus is directly between Saturn and Neptune, making the planet even more lonesome.', 'f', '2021-05-07 18:57:42.517205-07');
 INSERT INTO main_app_planet(name, img, bio, verified_planet, created_at, user_id)
 VALUES('Neptune', 'https://nypost.com/wp-content/uploads/sites/2/2021/11/astrology-neptune-sign-1a.jpg?quality=80&strip=all', 'Neptune recently became engaged to Saturn. The proposal delighted Saturnians and Neptunians alike.', 'f', '2021-05-07 18:57:42.517205-07');
->>>>>>> aa7761cb5b77750b4a708ff4c3270a8e8b256005
