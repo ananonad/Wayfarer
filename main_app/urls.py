@@ -20,7 +20,7 @@ urlpatterns = [
      path('<int:pk>/profile/detail/', views.ProfileDetail.as_view(), name="detail_profile"),
      # path('<int:pk>/profile/delete/', views.ProfileDelete.as_view(), name="profile_delete"),
      path('', views.logout, name="logout"),
-
-     path('<int:pk>/comments/new/', views.CommentCreate.as_view(), name="comment_create")
+     path('<int:pk>/comments/new/', views.CommentCreate.as_view(), name="comment_create"),
+     path('<int:pk>/',views.modal),
 ]
 

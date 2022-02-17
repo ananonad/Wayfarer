@@ -180,15 +180,15 @@ def logoutuser(request):
 
 class CommentCreate(CreateView):
     model = Comment
-    fields = ['user', 'title', 'comment']
+    fields = ['user','title', 'comment']
     template_name = "comment_create.html"
     def post(self, request, pk):
-        user = self.request.user
+        user = User.objects.get(pk=pk)
         title = request.POST.get("title")
         comment = request.POST.get("comment")
         Comment.objects.create(user=user, title=title, comment=comment)
-        return redirect('detail', pk=pk)
-
+        return redirect('landing')
+        
 class CommentUpdate(UpdateView):
     model = Comment
     fields = ['name', 'title', 'comment',]
@@ -203,3 +203,10 @@ class CommentDelete(DeleteView):
     model = Comment
     template_name = "comment_delete_confirmation.html"
     success_url = "/list/"
+
+def modal(request):
+    model = Comment
+    field = ['title', 'comment']
+    title = request.POST.get("title")
+    comment = request.POST.get("comment")
+    return render(request,'commentcreate.html',{"form":UserCreationForm})
