@@ -51,6 +51,7 @@ class Home(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["planets"] = Planet.objects.all()
+        context["comments"] = Comment.objects.all()
         return context
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
@@ -194,7 +195,7 @@ class CommentCreate(CreateView):
         comment = request.POST.get("comment")
         planet = Planet.objects.get(pk=request.POST.get("planet"))
         Comment.objects.create(user=user, title=title, comment=comment, planet=planet)
-        return redirect('landing')
+        return redirect('home')
 
         
 class CommentUpdate(UpdateView):
