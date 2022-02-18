@@ -4,5 +4,5 @@ from .models import Planet
 from .models import User, Comment
 
 admin.site.register(Planet)
-# admin.site.register(User)
+admin.site.register(User)
 admin.site.register(Comment)
