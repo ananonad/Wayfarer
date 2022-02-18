@@ -31,13 +31,13 @@ class Profile(models.Model):
     # class Meta:
     #     ordering: ['created_at']
 
-class User(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    username = models.CharField(max_length=100)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="users")
-    def __str__(self):
-        return self.username
+# class User(models.Model):
+#     first_name = models.CharField(max_length=100)
+#     last_name = models.CharField(max_length=100)
+#     username = models.CharField(max_length=100)
+#     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="users")
+#     def __str__(self):
+#         return self.username
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_comments")
