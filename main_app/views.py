@@ -86,7 +86,7 @@ class List(TemplateView):
             context["planets"] = Planet.objects.filter(user=self.request.user, name__icontains=name)
             context["header"] = f"Searching for {name}"
         else:
-            context["planets"] = Planet.objects.all(user=self.request.user)
+            context["planets"] = Planet.objects.all()
             context["header"] = "Trending Planets"
         return context
 
