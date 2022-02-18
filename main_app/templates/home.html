@@ -40,24 +40,25 @@
                     <div class="container-fluid">
                         <h3 class="trendingtitle trendingpostcontain">Trending posts from {{planet.name}}:</h3>
                     </div>
-                    {% for planet in planets %}
-                    <!-- ^^^ THIS WILL BE USERS THAT POSTED TO THAT PLANET!!! ^^^ -->
-                    <div class="postcontain row">
+                    {% for comment in comments %}
+                    {% if planet.name == comment.planet.name and comment.planet is not None %}
+                    <div class="row">
                         <div class="col-md-2">
                             <img class="img-responsive postimage" src="{{planet.img}}" alt="{{planet.name}}"/>
                         </div>
                         <div class="post col-md-10">
                             <div class="col-md-10 row">
-                                <h3 class="postname">{{planet.name}} says:</h3>
+                                <h3 class="postname">{{comment.user.username}} says:</h3>
                             </div>
                             <div class="post col-md-10 row">
-                                <h3 class="posttitle">Hello, example title...</h3>
+                                <h3 class="posttitle">{{comment.title}}</h3>
                             </div>
                             <div class="post col-md-10 row">
-                                <h4 class="posttext">Wait, I'm a planet, not a user!? Yeah, this is just an example. We don't actually have any content yet... Be patient! It's coming soon.</h4>
+                                <h4 class="posttext">{{comment.comment}}</h4>
                             </div>
                         </div>
                     </div>
+                    {% endif %}
                     {% endfor %}
                 </div>
             </div>
