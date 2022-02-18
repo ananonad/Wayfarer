@@ -63,6 +63,24 @@
                 </div>
             </div>
         </form>
+        <div class="detail__comments mb-5">
+            <h3 class="title is-3">comment</h3>
+        
+            {% for comment in comments %}
+            <div class="Comments">
+              <h4>{{comment.planet}}</h4>
+              <span><b>{{comment.title}}</b></span>
+              <span>{{comment.comment}}</span>
+            </div>
+            {% empty %}
+            <article class="message">
+              <div class="message-header">
+                <p>No Comments Available</p>
+              </div>
+            </article>
+        
+            {% endfor %}
+          </div>
         <hr>
         <div class="row">
             <div class="container-fluid">
