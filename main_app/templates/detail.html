@@ -55,11 +55,11 @@
             <br>
         </div>
         <hr>
-        <form class=“mb-5” action="{% url 'comment_create' planet.pk %}" method=“post”>
+        <form class=“mb-5” action="{% url 'comment_create' user.pk %}" method=“post”>
             {% csrf_token %}
             <div class="field has-addons">
                 <div class=“control”>
-                    <input
+                     <input
                         class=“input”
                         type=“text”
                         name=“user”
@@ -112,6 +112,7 @@
                     </div>
                 </div>
             </div>
+            
             {% endfor %}
         </div>
     </div>

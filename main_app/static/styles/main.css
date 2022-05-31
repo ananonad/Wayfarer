@@ -12,14 +12,15 @@ label {
 }
 .landingtext {
     position: absolute;
-    top: 40%;
-    left: 50%;
+    bottom: 25%;
+    left: 650px;
     transform: translate(-105%, -45%);
     color: ivory;
     filter: drop-shadow(.25rem .25rem .2rem black);
 }
 .landingtitle {
     font-size: 16vh;
+    filter: drop-shadow(.25rem .25rem .2rem black);
 }
 .landinghr {
     width: 110%;
@@ -194,4 +195,25 @@ a:hover {
 }
 .detailtopspace {
     padding-top: 4vh;
+}
+.movedown {
+    position: relative;
+    top: 10vh;
+}
+.planet {
+    font-size: 250%;
+}
+.aboutbg {
+    background-image: url("https://wallpaperaccess.com/full/5122560.jpg");
+    width: 100vw;
+    height: 100vh;
+}
+.aboutheader {
+    font-size: 6vw;
+    filter: drop-shadow(.25rem .25rem .2rem black);
+}
+.aboutsubheader {
+    font-size: 4vh;
+    filter: drop-shadow(.25rem .25rem .2rem black);
+    margin-left: 8vw;
 }
