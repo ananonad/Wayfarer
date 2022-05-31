@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.utils.decorators import method_decorator
@@ -50,6 +51,7 @@ class Home(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["planets"] = Planet.objects.all()
+        context["comments"] = Comment.objects.all()
         return context
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
@@ -84,7 +86,7 @@ class List(TemplateView):
             context["planets"] = Planet.objects.filter(user=self.request.user, name__icontains=name)
             context["header"] = f"Searching for {name}"
         else:
-            context["planets"] = Planet.objects.all(user=self.request.user)
+            context["planets"] = Planet.objects.all()
             context["header"] = "Trending Planets"
         return context
 
@@ -186,13 +188,15 @@ class CommentCreate(CreateView):
     model = Comment
     fields = ['user','title', 'comment', 'planet']
     template_name = "comment_create.html"
+
     def post(self, request, pk):
         user = User.objects.get(pk=pk)
         title = request.POST.get("title")
         comment = request.POST.get("comment")
-        planet = Planet.objects.get(pk=pk)
+        planet = Planet.objects.get(pk=request.POST.get("planet"))
         Comment.objects.create(user=user, title=title, comment=comment, planet=planet)
-        return redirect('landing')
+        return redirect('home')
+
         
 class CommentUpdate(UpdateView):
     model = Comment

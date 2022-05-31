@@ -1,30 +1,9 @@
 {% extends 'base.html' %} 
 {% block content %}
 {% include 'nav.html' %}
-<div class="container-fluid wayfarer">
-    <div class="col-md-4 placelist wayfarer topspace">
-        <a class="container-fluid wayfarer" href="/new/">
-            <img class="wayfarerphoto" src="http://www-scf.usc.edu/~aclarkso/acad275/filmpackage/seamless%20space_0.png" alt="stars"/>
-            <h2 class="planetname">New Destination +</h2>
-        </a>
-        {% for planet in planets %}
-        <a class="container-fluid wayfarer" href="{% url 'detail' planet.pk %}">
-            <img class="wayfarerphoto" src="{{planet.img}}" alt="{{planet.name}}"/>
-            <h2 class="planetname">{{planet.name}}</h2>
-        </a>
-        <div class="btn-toolbar pull-right" role="toolbar" aria-label="...">
-            <div class="btn-group btn-lg buttonoverride" role="group" aria-label="...">
-                <a href="{% url 'detail' planet.pk %}update/" class="glyphicon posticons glyphicon-edit" aria-hidden="true"></a>
-            </div>
-            <div class="btn-group btn-lg buttonoverride" role="group" aria-label="...">
-                <a href="{% url 'detail' planet.pk %}delete/" class="glyphicon posticons glyphicon-trash" aria-hidden="true"></a>
-            </div>
-        </div>
-        {% empty %}
-        <p>No Planets Available</p>
-        {% endfor %}
-    </div>
-    <div class="col-md-8 postdetails topspace">
+<div class="container-fluid">
+    <div class="col-md-1 detailborder"></div>
+    <div class="col-md-10 topspace detailspage">
         <div class="row">
             <div class="detailtopspace col-md-5">
                 <img class="img-responsive" src="{{planet.img}}" alt="{{planet.name}}" />
@@ -40,6 +19,14 @@
                 </div>
                 <br>
                 <div class="buttons row">
+                    <form class=“mb-5” action="{% url 'comment_create' user.pk %}" method=“post”>
+                        {% csrf_token %}
+                        <div class="commentbutton field has-addons">
+                            <div class=“control”>
+                                <button class="btn btn-info" type=“submit” value="submit">Add Comment</button>
+                            </div>
+                        </div>
+                    </form>
                     <a href="{% url 'update' planet.pk %}"> <button type="button" class="btn btn-primary">Update</button>
                         <span class="icon">
                             <i class="fas fa-edit"></i>
@@ -55,40 +42,34 @@
             <br>
         </div>
         <hr>
-        <form class=“mb-5” action="{% url 'comment_create' user.pk %}" method=“post”>
-            {% csrf_token %}
-            <div class="field has-addons">
-                <div class=“control”>
-                    <button class="button is-primary" type=“submit” value="submit">Add Comment</button>
+        <div class="detail__comments mb-5">
+            <h3 class="post">Posts from {{planet.name}}:</h3>
+            <div class="Comments">
+            {% for comment in comments %}
+            {% if comment.planet.pk == planet.pk %}
+            <div class="row detailcontain">
+                <div class="col-md-1">
+                    <img class="img-thumbnail detailpostimage" src="{{planet.img}}" alt="{{planet.name}}"/>
                 </div>
-            </div>
-        </form>
-        <hr>
-        <div class="row">
-            <div class="container-fluid">
-                <h3 class="trendingtitle trendingpostcontain">Trending posts from {{planet.name}}:</h3>
-            </div>
-            {% for planet in planets %}
-            <!-- ^^^ THIS WILL BE USERS THAT POSTED TO THAT PLANET!!! ^^^ -->
-            <div class="postcontain row">
-                <div class="col-md-2">
-                    <img class="img-responsive postimage" src="{{planet.img}}" alt="{{planet.name}}"/>
-                </div>
-                <div class="post col-md-10">
-                    <div class="col-md-10 row">
-                        <h3 class="postname">{{planet.name}} says:</h3>
+                <div class="post col-md-11">
+                    <div class="row">
+                        <h3 class="detailpostname">{{comment.user.username}} says:</h3>
                     </div>
-                    <div class="post col-md-10 row">
-                        <h3 class="posttitle">Hello, example title...</h3>
+                    <div class="post row">
+                        <h3 class="detailposttitle">{{comment.title}}</h3>
                     </div>
-                    <div class="post col-md-10 row">
-                        <h4 class="posttext">Wait, I'm a planet, not a user!? Yeah, this is just an example. We don't actually have any content yet... Be patient! It's coming soon.</h4>
+                    <div class="post row">
+                        <h4 class="detailposttext">{{comment.comment}}</h4>
                     </div>
                 </div>
             </div>
-            
+            {% endif %}
             {% endfor %}
+          </div>
+        <div class="row">
+
         </div>
     </div>
+    <div class="col-md-1"></div>
 </div>
 {% endblock %}

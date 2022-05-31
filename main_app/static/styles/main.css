@@ -165,7 +165,7 @@ a:hover {
     position: relative;
     bottom: 30px;
     right: 4px;
-    margin-bottom: -26.5px;
+    margin-bottom: -26.65px;
 }
 .homesplash {
     color: ivory;
@@ -216,4 +216,40 @@ a:hover {
     font-size: 4vh;
     filter: drop-shadow(.25rem .25rem .2rem black);
     margin-left: 8vw;
+}
+.commentbutton {
+    margin: .5vh 0;
+}
+.detailcontain {
+    margin-top: 4vh;
+    margin-bottom: 4vh;
+}
+.detailpostimage {
+    border: ivory;
+    border-radius: 8px;
+    border-width: 1px;
+    border-style: solid;
+    width: 6vw;
+}
+.detailpostname {
+    margin-top: 0;
+    font-size: 4vh;
+    filter: drop-shadow(.25rem .25rem .2rem black);
+}
+.detailposttitle {
+    margin-top: 0;
+    font-size: 2.5vh;
+    filter: drop-shadow(.25rem .25rem .2rem black);
+}
+.detailposttext {
+    margin: 0 0 5vh;
+    font-size: 2vh;
+    filter: drop-shadow(.25rem .25rem .2rem black);
+}
+.detailspage {
+    background-color: #353535;
+    filter: opacity(85%);
+}
+.opacityoverride {
+    opacity: 100%;
 }
